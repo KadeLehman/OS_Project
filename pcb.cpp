@@ -1,10 +1,11 @@
 #include "pcb.h"
 #include <ctime>
 
-pcb::pcb() {
-    priority = rand() % 4 + 1;
+pcb::pcb(int id, int priority) {
+    this->id = id;
+    this->priority = priority;
 }
 
-void pcb::print() {
-    cout << priority << endl;
+void pcb::print() const {
+    cout << "id: " << this->id << ", priority: " << this->priority << endl;
 }

@@ -6,10 +6,11 @@ using namespace std;
 // Process Control Block
 class pcb {
 private:
+    int id;
     int priority;
 public:
-    pcb();
-    void print();
+    pcb(int id, int priority);
+    void print() const;
 };
 
 

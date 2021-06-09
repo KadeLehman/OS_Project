@@ -1,19 +1,18 @@
 #include "kernel.h"
 
+// Handles user input and processes; manipulates queues by using enqueue + dequeue.
 int kernel::run() {
-    // Handling user input and processes.
-    // Manipulating queues by using enqueue + dequeue.
 
-    pcb a,b,c;
+    pcb a(1,4),
+        b(2,2),
+        c(3,1);
 
-    // My pqueue works completely now :)
+    // My process queue properly enqueues and dequeues.
     ready.enqueue(a);
     ready.print();
     ready.enqueue(b);
     ready.print();
     ready.enqueue(c,1);
-    ready.print();
-    ready.enqueue(a,0);
     ready.print();
 
     ready.dequeue(2);

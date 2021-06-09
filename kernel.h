@@ -3,7 +3,6 @@
 #include <iostream>
 #include "pqueue.h"
 #include "pcb.h"
-using namespace std;
 
 class kernel {
 private:

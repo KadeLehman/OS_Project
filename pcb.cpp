@@ -1,5 +1,4 @@
 #include "pcb.h"
-#include <ctime>
 
 pcb::pcb(int id, int priority) {
     this->id = id;

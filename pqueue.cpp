@@ -21,7 +21,7 @@ void pqueue::dequeue(int pos) {
 }
 
 void pqueue::print() {
-    for (pcb block : q) {
+    for (const pcb& block : q) {
         block.print();
     }
     cout << endl;

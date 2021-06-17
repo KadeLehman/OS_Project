@@ -3,9 +3,11 @@
 // Handles user input and processes; manipulates queues by using enqueue + dequeue.
 int kernel::run() {
 
-    pcb a(1,4),
-        b(2,2),
-        c(3,1);
+    // TODO: File or user input.
+
+    pcb a("Write",1,4),
+        b("ReadLine",2,2),
+        c("ReadFile",3,1);
 
     // My process queue properly enqueues and dequeues.
     ready.enqueue(a);

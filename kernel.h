@@ -16,4 +16,4 @@ public:
 #endif //OS_PROJECT_KERNEL_H
 
 // In modern operating systems, there are separate waiting queues that wait for memory, for i/o, etc.
-// However, you only need one waiting queue for the project
+// However, you only need one waiting queue for this project.

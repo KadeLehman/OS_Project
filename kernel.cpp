@@ -3,7 +3,7 @@
 // Handles user input and processes; manipulates queues by using enqueue + dequeue.
 int kernel::run() {
 
-    // TODO: File or user input.
+    // TODO: File or user input. I'll likely choose to make a file for file input.
 
     pcb a("Write",1,4),
         b("ReadLine",2,2),

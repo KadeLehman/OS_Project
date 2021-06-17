@@ -1,6 +1,6 @@
 #include "pqueue.h"
 
-void pqueue::enqueue(pcb block, int pos) {
+void pqueue::enqueue(const pcb& block, int pos) {
     if(pos < 0) {
         q.push_back(block);
         return;

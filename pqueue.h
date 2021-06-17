@@ -12,7 +12,7 @@ private:
     list<pcb>::iterator it;
 public:
     pqueue()=default;
-    void enqueue(pcb, int pos = -1);
+    void enqueue(const pcb&, int pos = -1);
     void dequeue(int pos = -1);
     void print();
 };

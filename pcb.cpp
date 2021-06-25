@@ -1,9 +1,9 @@
 #include "pcb.h"
 
-pcb::pcb(string name, int id, int priority) {
-    this->name = name;
+pcb::pcb(int id, int priority, string name) {
     this->id = id;
     this->priority = priority;
+    this->name = name;
 }
 
 void pcb::print() const {

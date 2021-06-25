@@ -1,0 +1,3 @@
+1 4 Write
+2 2 ReadLine
+3 1 ReadFile

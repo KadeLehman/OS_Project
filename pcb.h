@@ -8,13 +8,13 @@ using namespace std;
 // Process Control Block
 class pcb {
 private:
-    string name;
     int id;
     int priority;
+    string name;
     // int programCounter;
     // list<string> openFiles;
 public:
-    pcb(string name, int id, int priority);
+    pcb(int id, int priority, string name);
     void print() const;
 };
 

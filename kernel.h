@@ -2,6 +2,9 @@
 #define OS_PROJECT_KERNEL_H
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <sstream>
+#include <map>
 #include "pqueue.h"
 #include "pcb.h"
 using namespace std;
@@ -12,6 +15,7 @@ private:
 public:
     kernel()=default;
     int run();
+    string readFileIntoString(const string& fileName);
 };
 
 

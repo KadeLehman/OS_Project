@@ -1,3 +1,9 @@
+/// Sources:
+/* https://www.delftstack.com/howto/cpp/read-csv-file-in-cpp/
+ *   String parsing code (moderately modified)
+ *   readFileIntoString() (slightly modified)
+ */
+
 #include "kernel.h"
 
 // Handles user input and processes; manipulates queues by using enqueue + dequeue.
@@ -12,7 +18,7 @@ int kernel::run() {
     string id,priority,name;
 
     // TODO: Reading from file.
-
+    //
 
     myFile.close();
 
@@ -39,4 +45,16 @@ int kernel::run() {
     cout << "~~~~ End of test results ~~~~" << endl;
 
     return 0;
+}
+
+string kernel::readFileIntoString(const string& fileName) {
+    auto ss = ostringstream{};
+    ifstream input_file(fileName);
+    if (!input_file.is_open()) {
+        cerr << "Could not open the file - "
+             << fileName << endl;
+        exit(EXIT_FAILURE);
+    }
+    ss << input_file.rdbuf();
+    return ss.str();
 }

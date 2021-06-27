@@ -9,8 +9,10 @@ int kernel::run() {
         return 1;
     }
 
+    string id,priority,name;
+
     // TODO: Reading from file.
-    // Write code here.
+
 
     myFile.close();
 

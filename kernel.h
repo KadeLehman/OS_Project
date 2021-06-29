@@ -15,7 +15,7 @@ private:
 public:
     kernel()=default;
     int run();
-    string readFileIntoString(const string& fileName);
+    string readFileIntoString(const string& path);
 };
 
 

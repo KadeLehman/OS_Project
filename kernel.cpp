@@ -1,7 +1,7 @@
 /// Sources:
-/* https://www.delftstack.com/howto/cpp/read-csv-file-in-cpp/
- *   String parsing code (moderately modified)
- *   readFileIntoString() (slightly modified)
+/* https://www.tutorialspoint.com/How-to-read-and-parse-CSV-files-in-Cplusplus
+ *   parseCSVLine()
+ *
  */
 
 #include "kernel.h"
@@ -12,13 +12,14 @@ int kernel::run() {
     ifstream myFile("processes.txt");
     if(!myFile.is_open()) {
         cout << "Input file was not opened." << endl;
-        return 1;
+        exit(EXIT_FAILURE);
     }
 
     string id,priority,name;
 
     // TODO: Reading from file.
-    //
+    // 1. setup first
+    // 2. while getline isn't null, parse line using parseCSVLine
 
     myFile.close();
 
@@ -47,12 +48,12 @@ int kernel::run() {
     return 0;
 }
 
-string kernel::readFileIntoString(const string& fileName) {
+string kernel::readFileIntoString(const string& path) {
     auto ss = ostringstream{};
-    ifstream input_file(fileName);
+    ifstream input_file(path);
     if (!input_file.is_open()) {
         cerr << "Could not open the file - "
-             << fileName << endl;
+             << path << endl;
         exit(EXIT_FAILURE);
     }
     ss << input_file.rdbuf();

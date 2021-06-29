@@ -3,8 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <sstream>
-#include <map>
+#include <string>
 #include "pqueue.h"
 #include "pcb.h"
 using namespace std;
@@ -15,7 +14,8 @@ private:
 public:
     kernel()=default;
     int run();
-    string readFileIntoString(const string& path);
+    vector<string> parseCSVLine(string line);
+    void hardCodeTest();
 };
 
 

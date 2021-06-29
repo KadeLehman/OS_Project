@@ -3,7 +3,7 @@
 pcb::pcb(int id, int priority, string name) {
     this->id = id;
     this->priority = priority;
-    this->name = name;
+    this->name = move(name);
 }
 
 void pcb::print() const {

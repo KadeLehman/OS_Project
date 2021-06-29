@@ -1,7 +1,6 @@
 /// Sources:
 /* https://www.tutorialspoint.com/How-to-read-and-parse-CSV-files-in-Cplusplus
  *   parseCSVLine()
- *
  */
 
 #include "kernel.h"
@@ -11,17 +10,26 @@ int kernel::run() {
 
     ifstream myFile("processes.txt");
     if(!myFile.is_open()) {
-        cout << "Input file was not opened." << endl;
+        cout << "Could not open input file." << endl;
         exit(EXIT_FAILURE);
     }
+    string line,id,priority,name;
 
-    string id,priority,name;
+    // TODO: while getline, parse line using parseCSVLine
+    while (getline(myFile,line)) {
 
-    // TODO: Reading from file.
-    // 1. setup first
-    // 2. while getline isn't null, parse line using parseCSVLine
+    }
 
     myFile.close();
+    hardCodeTest();
+    return 0;
+}
+
+vector<string> kernel::parseCSVLine(string line){
+    // stringstream
+}
+
+void kernel::hardCodeTest() {
 
     // Hard-coded test input:
     pcb a(1,4,"Write"),
@@ -44,18 +52,4 @@ int kernel::run() {
     ready.print();
 
     cout << "~~~~ End of test results ~~~~" << endl;
-
-    return 0;
-}
-
-string kernel::readFileIntoString(const string& path) {
-    auto ss = ostringstream{};
-    ifstream input_file(path);
-    if (!input_file.is_open()) {
-        cerr << "Could not open the file - "
-             << path << endl;
-        exit(EXIT_FAILURE);
-    }
-    ss << input_file.rdbuf();
-    return ss.str();
 }

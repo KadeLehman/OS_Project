@@ -1,32 +1,61 @@
 /// Sources:
-/* https://www.tutorialspoint.com/How-to-read-and-parse-CSV-files-in-Cplusplus
- *   parseCSVLine()
+/* https://www.delftstack.com/howto/cpp/read-csv-file-in-cpp/
+ *   readFileIntoString() - slightly modified (file closure)
  */
 
 #include "kernel.h"
 
-// Handles user input and processes; manipulates queues by using enqueue + dequeue.
+// Handles file input and processes; manipulates queues by using enqueue + dequeue.
 int kernel::run() {
-
-    ifstream myFile("processes.txt");
-    if(!myFile.is_open()) {
-        cout << "Could not open input file." << endl;
-        exit(EXIT_FAILURE);
-    }
-    string line,id,priority,name;
-
-    // TODO: while getline, parse line using parseCSVLine
-    while (getline(myFile,line)) {
-
-    }
-
-    myFile.close();
+    parseString();
+    hardCodedClear();
     hardCodeTest();
     return 0;
 }
 
-vector<string> kernel::parseCSVLine(string line){
-    // stringstream
+void kernel::parseString() {
+    string id,priority,name;
+    string filename("processes.csv");
+    string file_contents;
+    char delimiter = ',';
+
+    file_contents = readFileIntoString(filename);
+
+    istringstream sstream(file_contents);
+    string record;
+
+    while (getline(sstream, record)) {
+        istringstream line(record);
+        while (getline(line, record, delimiter)) {
+            id = record;
+            getline(line, record, delimiter);
+            priority = record;
+            getline(line, record, delimiter);
+            name = record;
+            pcb tmp(stoi(id), stoi(priority), name);
+            ready.enqueue(tmp);
+        }
+    }
+}
+
+void kernel::hardCodedClear() {
+    ready.dequeue();
+    ready.dequeue();
+    ready.dequeue();
+}
+
+string kernel::readFileIntoString(const string& path) {
+    auto ss = ostringstream{};
+    ifstream input_file(path);
+    if (!input_file.is_open()) {
+        cerr << "Could not open the file - '"
+             << path << "'" << endl;
+        exit(EXIT_FAILURE);
+    }
+    ss << input_file.rdbuf();
+    string fileContents = ss.str();
+    input_file.close();
+    return fileContents;
 }
 
 void kernel::hardCodeTest() {

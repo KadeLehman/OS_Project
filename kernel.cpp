@@ -8,6 +8,7 @@
 // Handles file input and processes; manipulates queues by using enqueue + dequeue.
 int kernel::run() {
     parseString();
+    ready.print();
     hardCodedClear();
     hardCodeTest();
     return 0;

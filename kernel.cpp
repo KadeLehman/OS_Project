@@ -28,6 +28,7 @@ void kernel::parseString() {
 
     while (getline(sstream, record)) {
         istringstream line(record);
+        // Read and copy each line from file into its own new PCB.
         while (getline(line, record, delimiter)) {
             id = record;
             getline(line, record, delimiter);

@@ -1,6 +1,7 @@
 /// Sources:
 /* https://www.delftstack.com/howto/cpp/read-csv-file-in-cpp/
- *   readFileIntoString() - slightly modified (file closure)
+ *   readFileIntoString() - slightly modified (for file closure)
+ *   parseString() - moderately modified (for recording data into new PCB's)
  */
 
 #include "kernel.h"

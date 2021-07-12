@@ -11,7 +11,8 @@ using namespace std;
 
 class kernel {
 private:
-    pqueue ready, waiting;
+    // Schedulers typically dispatch processes in the ready queue to the running queue.
+    pqueue ready;
 public:
     kernel()=default;
     int run();

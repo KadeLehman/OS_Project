@@ -10,13 +10,11 @@
 int kernel::run() {
     parseString();
     ready.print();
-    hardCodedClear();
-    hardCodeTest();
     return 0;
 }
 
 void kernel::parseString() {
-    string id,priority,name;
+    string process_id,arrival_time,burst_time,priority;
     string filename("processes.csv");
     string file_contents;
     char delimiter = ',';
@@ -30,21 +28,17 @@ void kernel::parseString() {
         istringstream line(record);
         // Read and copy each line from file into its own new PCB.
         while (getline(line, record, delimiter)) {
-            id = record;
+            process_id = record;
+            getline(line, record, delimiter);
+            arrival_time = record;
+            getline(line, record, delimiter);
+            burst_time = record;
             getline(line, record, delimiter);
             priority = record;
-            getline(line, record, delimiter);
-            name = record;
-            pcb tmp(stoi(id), stoi(priority), name);
+            pcb tmp(stoi(process_id), stoi(arrival_time), stoi(burst_time), stoi(priority));
             ready.enqueue(tmp);
         }
     }
-}
-
-void kernel::hardCodedClear() {
-    ready.dequeue();
-    ready.dequeue();
-    ready.dequeue();
 }
 
 string kernel::readFileIntoString(const string& path) {
@@ -59,29 +53,4 @@ string kernel::readFileIntoString(const string& path) {
     string fileContents = ss.str();
     input_file.close();
     return fileContents;
-}
-
-void kernel::hardCodeTest() {
-
-    // Hard-coded test input:
-    pcb a(1,4,"Write"),
-        b(2,2,"ReadLine"),
-        c(3,1,"ReadFile");
-
-    cout << "~~~~ Begin test results ~~~~\n" << endl;
-
-    // My process queue properly enqueues and dequeues:
-    ready.enqueue(a);
-    ready.print();
-    ready.enqueue(b);
-    ready.print();
-    ready.enqueue(c,1);
-    ready.print();
-
-    ready.dequeue(2);
-    ready.print();
-    ready.dequeue(0);
-    ready.print();
-
-    cout << "~~~~ End of test results ~~~~" << endl;
 }

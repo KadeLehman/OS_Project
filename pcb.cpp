@@ -1,13 +1,15 @@
 #include "pcb.h"
 
-pcb::pcb(int id, int priority, string name) {
-    this->id = id;
+pcb::pcb(int process_id, int arrival_time, int burst_time, int priority) {
+    this->process_id = process_id;
+    this->arrival_time = arrival_time;
+    this->burst_time = burst_time;
     this->priority = priority;
-    this->name = move(name);
 }
 
 void pcb::print() const {
-    cout << "id: " << this->id
-         << ", priority: " << this->priority
-         << ", name: " << this->name << endl;
+    cout << "process_id: " << this->process_id
+         << ", arrival_time: " << this->arrival_time
+         << ", burst_time: " << this->burst_time
+         << ", priority: " << this->priority << endl;
 }

@@ -16,9 +16,7 @@ public:
     kernel()=default;
     int run();
     void parseString();
-    void hardCodedClear();
-    string readFileIntoString(const string& path);
-    void hardCodeTest();
+    static string readFileIntoString(const string& path);
 };
 
 

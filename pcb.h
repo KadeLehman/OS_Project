@@ -12,6 +12,10 @@ private:
     int priority;
 public:
     pcb(int,int,int,int);
+    int getPid() const;
+    int getArrivalTime() const;
+    int getBurstTime() const;
+    int getPriority() const;
     void print() const;
 };
 

@@ -14,6 +14,7 @@ public:
     pqueue()=default;
     void enqueue(const pcb&, int pos = -1);
     void dequeue(int pos = -1);
+    int position(int pid);
     void print();
 };
 

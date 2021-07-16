@@ -11,10 +11,13 @@ using namespace std;
 
 class kernel {
 private:
+    // In modern operating systems, there are separate waiting queues that wait for memory, for i/o, etc.
     // Schedulers typically dispatch processes in the ready queue to the running queue.
+    // Because my project only requires calculations for fictional processes, I just need one queue.
     pqueue ready;
+    int clock;
 public:
-    kernel()=default;
+    kernel();
     int run();
     void parseString();
     static string readFileIntoString(const string& path);
@@ -22,6 +25,3 @@ public:
 
 
 #endif //OS_PROJECT_KERNEL_H
-
-// In modern operating systems, there are separate waiting queues that wait for memory, for i/o, etc.
-// However, I only need one waiting queue for this project.

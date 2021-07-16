@@ -6,6 +6,10 @@
 
 #include "kernel.h"
 
+kernel::kernel() {
+    clock = 0;
+}
+
 // Handles file input and processes; manipulates queues by using enqueue + dequeue.
 int kernel::run() {
     parseString();

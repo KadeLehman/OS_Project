@@ -60,5 +60,5 @@ string kernel::readFileIntoString(const string& path) {
 }
 
 void kernel::sjf() {
-
+    // shortest job first (see notebook)
 }

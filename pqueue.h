@@ -16,6 +16,7 @@ public:
     void dequeue(int pos = -1);
     int position(int pid);
     void print();
+    void clear();
 };
 
 

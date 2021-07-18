@@ -39,3 +39,7 @@ void pqueue::print() {
     }
     cout << endl;
 }
+
+void pqueue::clear() {
+    q.clear();
+}

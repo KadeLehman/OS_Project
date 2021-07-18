@@ -21,7 +21,7 @@ public:
     int run();
     void parseString();
     static string readFileIntoString(const string& path);
-    // insert scheduler function here
+    void sjf();
 };
 
 

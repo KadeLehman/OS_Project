@@ -58,3 +58,7 @@ string kernel::readFileIntoString(const string& path) {
     input_file.close();
     return fileContents;
 }
+
+void kernel::sjf() {
+
+}

@@ -10,12 +10,15 @@ private:
     int arrival_time;
     int burst_time;
     int priority;
+    bool arrived;
 public:
     pcb(int,int,int,int);
     int getPid() const;
     int getArrivalTime() const;
     int getBurstTime() const;
     int getPriority() const;
+    void markArrived();
+    void markNotArrived();
     void print() const;
 };
 

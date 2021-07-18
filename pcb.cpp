@@ -5,6 +5,7 @@ pcb::pcb(int process_id, int arrival_time, int burst_time, int priority) {
     this->arrival_time = arrival_time;
     this->burst_time = burst_time;
     this->priority = priority;
+    this->arrived = false;
 }
 
 int pcb::getPid() const {
@@ -21,6 +22,14 @@ int pcb::getBurstTime() const {
 
 int pcb::getPriority() const {
     return this->priority;
+}
+
+void pcb::markArrived() {
+    arrived = true;
+}
+
+void pcb::markNotArrived() {
+    arrived = false;
 }
 
 void pcb::print() const {

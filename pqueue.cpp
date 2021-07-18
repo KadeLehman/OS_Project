@@ -1,5 +1,13 @@
 #include "pqueue.h"
 
+pqueue::pqueue() {
+    clock = 0;
+}
+
+void pqueue::resetClock() {
+    clock = 0;
+}
+
 void pqueue::enqueue(const pcb& block, int pos) {
     if (pos < 0) {
         q.push_back(block);
@@ -33,10 +41,6 @@ int pqueue::position(int pid) {
     exit(EXIT_FAILURE);
 }
 
-int pqueue::size() {
-    return q.size();
-}
-
 void pqueue::print() {
     for (const pcb& block : q) {
         block.print();
@@ -50,6 +54,16 @@ void pqueue::clear() {
 
 // Returns the average waiting time for the "shortest job first" scheduling algorithm.
 int pqueue::sjf() {
-
+    unsigned totalWaitTime = 0;
+    unsigned numProcesses = q.size();
+    while (!q.empty()) {
+        unsigned waitingTime = clock;
+        for (pcb& block : q) {
+            if (block.getArrivalTime() >= clock) {
+                block.markArrived();
+            }
+        }
+        // TODO: int lowest...
+    }
     return 0;
 }

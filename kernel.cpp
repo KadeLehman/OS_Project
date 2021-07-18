@@ -10,6 +10,7 @@
 int kernel::run() {
     parseFile();
     ready.print();
+    readyCopy = ready;
     compareAlgorithms();
     return 0;
 }
@@ -61,7 +62,7 @@ string kernel::readFileIntoString(const string& path) {
 // Calculates and prints the average waiting time of each scheduling algorithm.
 void kernel::compareAlgorithms() {
     int avgWaitTimeSJF = ready.sjf();
-    // int avgWaitTimeNPPS = ready.npps();
+    // int avgWaitTimeNPPS = readyCopy.npps();
     // cout << "Average wait time for SJF: " << avgWaitTimeSJF << endl;
     // cout << "Average wait time for NPPS: " << avgWaitTimeNPPS << endl;
     // Logic for "algo was x seconds less average wait time than the other algo"

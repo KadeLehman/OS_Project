@@ -15,13 +15,12 @@ private:
     // Schedulers typically dispatch processes in the ready queue to the running queue.
     // Because my project only requires calculations for fictional processes, I just need one queue.
     pqueue ready;
-    int clock;
 public:
-    kernel();
+    kernel()=default;
     int run();
-    void parseString();
+    void parseFile();
     static string readFileIntoString(const string& path);
-    void sjf();
+    void compareAlgorithms();
 };
 
 

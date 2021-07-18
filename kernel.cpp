@@ -6,18 +6,16 @@
 
 #include "kernel.h"
 
-kernel::kernel() {
-    clock = 0;
-}
-
-// Handles file input and processes; manipulates queues by using enqueue + dequeue.
+// Handles file input and processes; manipulates ready queue by using enqueue + dequeue.
 int kernel::run() {
-    parseString();
+    parseFile();
     ready.print();
+    compareAlgorithms();
     return 0;
 }
 
-void kernel::parseString() {
+// Processes the input file to create process control blocks.
+void kernel::parseFile() {
     string process_id,arrival_time,burst_time,priority;
     string filename("processes.csv");
     string file_contents;
@@ -45,6 +43,7 @@ void kernel::parseString() {
     }
 }
 
+// Reads the give file into a single returned string.
 string kernel::readFileIntoString(const string& path) {
     auto ss = ostringstream{};
     ifstream input_file(path);
@@ -59,6 +58,7 @@ string kernel::readFileIntoString(const string& path) {
     return fileContents;
 }
 
-void kernel::sjf() {
-    // shortest job first (see notebook)
+void kernel::compareAlgorithms() {
+    int avgWaitTimeSJF = ready.sjf();
+    // int avgWaitTimeNPPS = ready.npps();
 }

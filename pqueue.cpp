@@ -33,6 +33,10 @@ int pqueue::position(int pid) {
     exit(EXIT_FAILURE);
 }
 
+int pqueue::size() {
+    return q.size();
+}
+
 void pqueue::print() {
     for (const pcb& block : q) {
         block.print();
@@ -42,4 +46,9 @@ void pqueue::print() {
 
 void pqueue::clear() {
     q.clear();
+}
+
+int pqueue::sjf() {
+
+    return 0;
 }

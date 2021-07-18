@@ -43,7 +43,7 @@ void kernel::parseFile() {
     }
 }
 
-// Reads the give file into a single returned string.
+// Reads the given file into a single returned string.
 string kernel::readFileIntoString(const string& path) {
     auto ss = ostringstream{};
     ifstream input_file(path);
@@ -58,7 +58,11 @@ string kernel::readFileIntoString(const string& path) {
     return fileContents;
 }
 
+// Calculates and prints the average waiting time of each scheduling algorithm.
 void kernel::compareAlgorithms() {
     int avgWaitTimeSJF = ready.sjf();
     // int avgWaitTimeNPPS = ready.npps();
+    // cout << "Average wait time for SJF: " << avgWaitTimeSJF << endl;
+    // cout << "Average wait time for NPPS: " << avgWaitTimeNPPS << endl;
+    // Logic for "algo was x seconds less average wait time than the other algo"
 }

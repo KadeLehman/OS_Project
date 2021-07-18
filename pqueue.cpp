@@ -48,6 +48,7 @@ void pqueue::clear() {
     q.clear();
 }
 
+// Returns the average waiting time for the "shortest job first" scheduling algorithm.
 int pqueue::sjf() {
 
     return 0;

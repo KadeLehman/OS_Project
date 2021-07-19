@@ -20,7 +20,7 @@ public:
     int position(int pid);
     void print();
     void clear();
-    unsigned sjf();
+    double sjf();
 };
 
 

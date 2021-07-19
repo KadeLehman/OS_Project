@@ -54,12 +54,15 @@ void pqueue::clear() {
 }
 
 /// Returns the average waiting time of all processes in this queue when using "shortest job first" scheduling.
-unsigned pqueue::sjf() {
+double pqueue::sjf() {
 
     /// Initialize variables before while loop.
     unsigned processBeginTime;
     unsigned totalWaitTime = 0;
     unsigned numProcesses = q.size();
+    bool noneArrived = true;
+    bool firstProcessExecuted = false;
+    unsigned waitTimeFirstProcess = 0;
 
     /// Exhaust the entire queue.
     while (!q.empty()) {
@@ -71,12 +74,19 @@ unsigned pqueue::sjf() {
         for (pcb& block : q) {
             if (block.getArrivalTime() >= clock) {
                 block.markArrived();
+                noneArrived = false;
             }
+        }
+
+        /// If no processes have arrived yet, keep track of time and loop back.
+        if (noneArrived) {
+            waitTimeFirstProcess += 1;
+            continue;
         }
 
         /// Find the process that will take the least amount of time to complete.
         int lowest = std::numeric_limits<int>::max(); // Very big number, effectively infinity.
-        int position = NULL;
+        int position = 0;
         for (const pcb& block : q) {
             if (block.isArrived() && (block.getBurstTime() < lowest)) {
                 lowest = block.getBurstTime();
@@ -84,12 +94,16 @@ unsigned pqueue::sjf() {
             }
         }
 
-        /// Execute that process.
-        clock += lowest;
+        /// Execute that process; accumulate wait time.
+        if (!firstProcessExecuted) { // First process wait time dependent upon arrival_time only.
+            dequeue(position);
+            firstProcessExecuted = true;
+            totalWaitTime += waitTimeFirstProcess;
+            continue;
+        }
+        clock += lowest; // Processes after the first one have wait time also dependent upon previous burst_time.
         dequeue(position);
-
-        /// Accumulate wait time.
         totalWaitTime += clock - processBeginTime;
     }
-    return totalWaitTime / numProcesses;
+    return static_cast<double>(totalWaitTime) / numProcesses;
 }

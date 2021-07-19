@@ -17,6 +17,7 @@ public:
     int getArrivalTime() const;
     int getBurstTime() const;
     int getPriority() const;
+    bool isArrived() const;
     void markArrived();
     void markNotArrived();
     void print() const;

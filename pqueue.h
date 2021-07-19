@@ -2,6 +2,7 @@
 #define OS_PROJECT_PQUEUE_H
 #include <iostream>
 #include <list>
+#include <limits>
 #include "pcb.h"
 using namespace std;
 
@@ -19,7 +20,7 @@ public:
     int position(int pid);
     void print();
     void clear();
-    int sjf();
+    unsigned sjf();
 };
 
 

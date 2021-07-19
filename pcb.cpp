@@ -24,6 +24,10 @@ int pcb::getPriority() const {
     return this->priority;
 }
 
+bool pcb::isArrived() const {
+    return this->arrived;
+}
+
 void pcb::markArrived() {
     arrived = true;
 }

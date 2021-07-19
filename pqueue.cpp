@@ -53,17 +53,35 @@ void pqueue::clear() {
 }
 
 // Returns the average waiting time for the "shortest job first" scheduling algorithm.
-int pqueue::sjf() {
+unsigned pqueue::sjf() {
+
     unsigned totalWaitTime = 0;
     unsigned numProcesses = q.size();
+
     while (!q.empty()) {
+
+        /// Keep track of time.
         unsigned waitingTime = clock;
+
+        /// Determine which processes have arrived and are ready for execution (according to the input file).
         for (pcb& block : q) {
             if (block.getArrivalTime() >= clock) {
                 block.markArrived();
             }
         }
-        // TODO: int lowest...
+
+        /// Find the process that will take the least amount of time to complete.
+        int lowest = std::numeric_limits<int>::max(); // Very big number, effectively infinity.
+        int position = NULL;
+        for (const pcb& block : q) {
+            if (block.isArrived() && (block.getBurstTime() < lowest)) {
+                lowest = block.getBurstTime();
+                position = this->position(block.getPid());
+            }
+        }
+
+        /// Execute that process.
+        // TODO: more coding
     }
-    return 0;
+    return totalWaitTime / numProcesses;
 }

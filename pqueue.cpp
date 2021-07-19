@@ -28,8 +28,9 @@ void pqueue::dequeue(int pos) {
     q.erase(it);
 }
 
+/// Returns the position of the process with given identifier.
 int pqueue::position(int pid) {
-    // Counter will track the position of the current pcb being checked for a matching process_id.
+    // NOTE: Counter will track the position of the current pcb being checked for a matching process_id.
     int counter = 0;
     for (const pcb& block : q) {
         if (block.getPid() == pid) {
@@ -37,7 +38,7 @@ int pqueue::position(int pid) {
         }
         counter++;
     }
-    cout << "Error in pqueue::position(int pid) -> requested pid does not match to any PCB in this process queue." << endl;
+    cout << "Error in pqueue::position(int pid) -> requested pid does not match to any PCB in this queue." << endl;
     exit(EXIT_FAILURE);
 }
 
@@ -52,16 +53,19 @@ void pqueue::clear() {
     q.clear();
 }
 
-// Returns the average waiting time for the "shortest job first" scheduling algorithm.
+/// Returns the average waiting time of all processes in this queue when using "shortest job first" scheduling.
 unsigned pqueue::sjf() {
 
+    /// Initialize variables before while loop.
+    unsigned processBeginTime;
     unsigned totalWaitTime = 0;
     unsigned numProcesses = q.size();
 
+    /// Exhaust the entire queue.
     while (!q.empty()) {
 
         /// Keep track of time.
-        unsigned waitingTime = clock;
+        processBeginTime = clock;
 
         /// Determine which processes have arrived and are ready for execution (according to the input file).
         for (pcb& block : q) {
@@ -81,7 +85,11 @@ unsigned pqueue::sjf() {
         }
 
         /// Execute that process.
-        // TODO: more coding
+        clock += lowest;
+        dequeue(position);
+
+        /// Accumulate wait time.
+        totalWaitTime += clock - processBeginTime;
     }
     return totalWaitTime / numProcesses;
 }

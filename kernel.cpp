@@ -6,7 +6,7 @@
 
 #include "kernel.h"
 
-// Handles file input and processes; manipulates ready queue by using enqueue + dequeue.
+/// Handles file input and processes; manipulates ready queue by using enqueue + dequeue.
 int kernel::run() {
     parseFile();
     ready.print();
@@ -15,7 +15,7 @@ int kernel::run() {
     return 0;
 }
 
-// Processes the input file to create process control blocks.
+/// Processes the input file to create process control blocks.
 void kernel::parseFile() {
     string process_id,arrival_time,burst_time,priority;
     string filename("processes.csv");
@@ -29,7 +29,8 @@ void kernel::parseFile() {
 
     while (getline(sstream, record)) {
         istringstream line(record);
-        // Read and copy each line from file into its own new PCB.
+
+        /// Read and copy each line from file into its own new PCB.
         while (getline(line, record, delimiter)) {
             process_id = record;
             getline(line, record, delimiter);
@@ -44,7 +45,7 @@ void kernel::parseFile() {
     }
 }
 
-// Reads the given file into a single returned string.
+/// Reads the given file into a single returned string.
 string kernel::readFileIntoString(const string& path) {
     auto ss = ostringstream{};
     ifstream input_file(path);
@@ -59,10 +60,10 @@ string kernel::readFileIntoString(const string& path) {
     return fileContents;
 }
 
-// Calculates and prints the average waiting time of each scheduling algorithm.
+/// Calculates and prints the average waiting time of each scheduling algorithm.
 void kernel::compareAlgorithms() {
-    int avgWaitTimeSJF = ready.sjf();
-    // int avgWaitTimeNPPS = readyCopy.npps();
+    unsigned avgWaitTimeSJF = ready.sjf();
+    // unsigned avgWaitTimeNPPS = readyCopy.npps();
     // cout << "Average wait time for SJF: " << avgWaitTimeSJF << endl;
     // cout << "Average wait time for NPPS: " << avgWaitTimeNPPS << endl;
     // Logic for "algo was x seconds less average wait time than the other algo"

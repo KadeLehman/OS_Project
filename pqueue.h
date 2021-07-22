@@ -21,6 +21,7 @@ public:
     void print();
     void clear();
     double sjf();
+    double npps();
 };
 
 

@@ -71,8 +71,9 @@ double pqueue::sjf() {
         processBeginTime = clock;
 
         /// Determine which processes have arrived and are ready for execution (according to the input file).
+        noneArrived = true;
         for (pcb& block : q) {
-            if (block.getArrivalTime() >= clock) {
+            if (block.getArrivalTime() <= clock) {
                 block.markArrived();
                 noneArrived = false;
             }
@@ -80,7 +81,8 @@ double pqueue::sjf() {
 
         /// If no processes have arrived yet, keep track of time and loop back.
         if (noneArrived) {
-            waitTimeFirstProcess += 1;
+            waitTimeFirstProcess++;
+            clock++;
             continue;
         }
 
@@ -99,9 +101,69 @@ double pqueue::sjf() {
             dequeue(position);
             firstProcessExecuted = true;
             totalWaitTime += waitTimeFirstProcess;
+            clock += waitTimeFirstProcess;
             continue;
         }
         clock += lowest; // Processes after the first one have wait time also dependent upon previous burst_time.
+        dequeue(position);
+        totalWaitTime += clock - processBeginTime;
+    }
+    return static_cast<double>(totalWaitTime) / numProcesses;
+}
+
+double pqueue::npps() {
+
+    /// Initialize variables before while loop.
+    unsigned processBeginTime;
+    unsigned totalWaitTime = 0;
+    unsigned numProcesses = q.size();
+    bool noneArrived = true;
+    bool firstProcessExecuted = false;
+    unsigned waitTimeFirstProcess = 0;
+
+    /// Exhaust the entire queue.
+    while (!q.empty()) {
+
+        /// Keep track of time.
+        processBeginTime = clock;
+
+        /// Determine which processes have arrived and are ready for execution (according to the input file).
+        noneArrived = true;
+        for (pcb& block : q) {
+            if (block.getArrivalTime() <= clock) {
+                block.markArrived();
+                noneArrived = false;
+            }
+        }
+
+        /// If no processes have arrived yet, keep track of time and loop back.
+        if (noneArrived) {
+            waitTimeFirstProcess++;
+            clock++;
+            continue;
+        }
+
+        /// Find the process with the highest priority.
+        int highestPriority = 0;
+        int position = 0;
+        int chosenProcessBurstTime = 0;
+        for (const pcb& block : q) {
+            if (block.isArrived() && (block.getPriority() < highestPriority)) {
+                highestPriority = block.getPriority();
+                chosenProcessBurstTime = block.getBurstTime();
+                position = this->position(block.getPid());
+            }
+        }
+
+        /// Execute that process; accumulate wait time.
+        if (!firstProcessExecuted) { // First process wait time dependent upon arrival_time only.
+            dequeue(position);
+            firstProcessExecuted = true;
+            totalWaitTime += waitTimeFirstProcess;
+            clock += waitTimeFirstProcess;
+            continue;
+        }
+        clock += chosenProcessBurstTime; // Processes after the first one have wait time also dependent upon previous burst_time.
         dequeue(position);
         totalWaitTime += clock - processBeginTime;
     }

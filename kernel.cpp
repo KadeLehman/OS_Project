@@ -66,5 +66,5 @@ void kernel::compareAlgorithms() {
     double avgWaitTimeNPPS = readyCopy.npps();
     cout << "Average wait time for SJF: " << avgWaitTimeSJF << endl;
     cout << "Average wait time for NPPS: " << avgWaitTimeNPPS << endl;
-    // Logic for "algo was x seconds less average wait time than the other algo"
+    // future improvement: Logic for "algo was x seconds less average wait time than the other algo"
 }

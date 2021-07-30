@@ -111,6 +111,8 @@ double pqueue::sjf() {
     return static_cast<double>(totalWaitTime) / numProcesses;
 }
 
+/// Returns the average waiting time of all processes in this queue
+/// when using "non-preemptive priority" scheduling.
 double pqueue::npps() {
 
     /// Initialize variables before while loop.

@@ -17,11 +17,12 @@ using namespace std;
 
 class kernel {
 private:
-    pqueue ready, readyCopy;
+    pqueue ready1, ready2;
 public:
     kernel()=default;
     int run();
     void parseFile();
+    void parseFileToCopy();
     static string readFileIntoString(const string& path);
     void compareAlgorithms();
 };

@@ -9,13 +9,14 @@
 /// Handles file input and processes; manipulates ready queue by using enqueue + dequeue.
 int kernel::run() {
     parseFile();
-    ready.print();
-    readyCopy = ready;
+    parseFileToCopy();
+    ready1.print();
+    //ready2.print(); // Both queues contain PCBs with the same values.
     compareAlgorithms();
     return 0;
 }
 
-/// Processes the input file to create process control blocks.
+/// Processes the input file to create process control blocks (into ready1 queue).
 void kernel::parseFile() {
     string process_id,arrival_time,burst_time,priority;
     string filename("processes.csv");
@@ -40,7 +41,37 @@ void kernel::parseFile() {
             getline(line, record, delimiter);
             priority = record;
             pcb tmp(stoi(process_id), stoi(arrival_time), stoi(burst_time), stoi(priority));
-            ready.enqueue(tmp);
+            ready1.enqueue(tmp);
+        }
+    }
+}
+
+/// Processes the input file to create process control blocks (into ready2 queue).
+void kernel::parseFileToCopy() {
+    string process_id,arrival_time,burst_time,priority;
+    string filename("processes.csv");
+    string file_contents;
+    char delimiter = ',';
+
+    file_contents = readFileIntoString(filename);
+
+    istringstream sstream(file_contents);
+    string record;
+
+    while (getline(sstream, record)) {
+        istringstream line(record);
+
+        /// Read and copy each line from file into its own new PCB.
+        while (getline(line, record, delimiter)) {
+            process_id = record;
+            getline(line, record, delimiter);
+            arrival_time = record;
+            getline(line, record, delimiter);
+            burst_time = record;
+            getline(line, record, delimiter);
+            priority = record;
+            pcb tmp(stoi(process_id), stoi(arrival_time), stoi(burst_time), stoi(priority));
+            ready2.enqueue(tmp);
         }
     }
 }
@@ -62,8 +93,8 @@ string kernel::readFileIntoString(const string& path) {
 
 /// Calculates and prints the average waiting time of each scheduling algorithm.
 void kernel::compareAlgorithms() {
-    double avgWaitTimeSJF = ready.sjf();
-    double avgWaitTimeNPPS = readyCopy.npps();
+    double avgWaitTimeSJF = ready1.sjf();
+    double avgWaitTimeNPPS = ready2.npps();
     cout << "Average wait time for SJF: " << avgWaitTimeSJF << endl;
     cout << "Average wait time for NPPS: " << avgWaitTimeNPPS << endl;
     // future improvement: Logic for "algo was x seconds less average wait time than the other algo"

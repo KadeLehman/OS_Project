@@ -146,7 +146,7 @@ double pqueue::npps() {
         }
 
         /// Find the process with the highest priority.
-        int highestPriority = 0;
+        int highestPriority = std::numeric_limits<int>::max(); // Very big number, effectively infinity.
         int position = 0;
         int chosenProcessBurstTime = 0;
         for (const pcb& block : q) {
